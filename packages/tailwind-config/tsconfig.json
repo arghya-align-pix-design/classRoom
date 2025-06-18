@@ -1,0 +1,9 @@
+// tsconfig.json
+{
+  "extends": "@my-repo2/typescript-config/react-library.json",
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "include": ["tailwind.config.ts"],
+  "exclude": ["node_modules", "dist"]
+}

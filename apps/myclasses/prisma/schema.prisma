@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+enum Role {
+  STUDENT
+  TEACHER
+}
+
+model User {
+  id           String       @id @default(uuid())
+  name         String
+  dob        DateTime?
+  email        String       @unique
+  password     String
+  phone1      String? @unique
+  phone2      String? @unique
+  createdAt   DateTime @default(now())
+  role         Role
+  gradeLevel   String?      // For students only
+  schoolName   String?      // Optional
+  qualification String?     // For teachers only
+  bio          String?      // Optional teacher field
+  experience   Int?         // Years of teaching experience
+
+  assignments  Assignment[] @relation("TeacherAssignments")
+  submissions  Submission[]
+  enrollments  Enrollment[]
+}
+
+model Subject {
+  id          String       @id @default(uuid())
+  name        String
+  code        String       @unique
+  period     Int      // like 1 for first period
+  dayOfWeek  String   // e.g. "Monday", "Tuesday"
+  startTime  DateTime
+  endTime    DateTime
+
+  assignments Assignment[]
+  enrollments Enrollment[]
+}
+
+
+model Enrollment {
+  id        String   @id @default(uuid())
+  userId    String
+  subjectId String
+
+  user      User     @relation(fields: [userId], references: [id])
+  subject   Subject  @relation(fields: [subjectId], references: [id])
+}
+
+model Assignment {
+  id         String       @id @default(uuid())
+  title      String
+  content    String
+  publishedAt DateTime    @default(now()) // When teacher publishes it
+  startDate  DateTime                   // When students can start
+  dueDate    DateTime
+  subjectId  String
+  teacherId  String
+
+  subject    Subject      @relation(fields: [subjectId], references: [id])
+  teacher    User         @relation("TeacherAssignments", fields: [teacherId], references: [id])
+  submissions Submission[]
+}
+
+model Submission {
+  id           String       @id @default(uuid())
+  studentId    String
+  assignmentId String
+  fileUrl      String
+  submittedAt  DateTime     @default(now())
+
+  student      User         @relation(fields: [studentId], references: [id])
+  assignment   Assignment   @relation(fields: [assignmentId], references: [id])
+}
+
