@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import SubjectButton from "@repo/ui/src/subjectbttn"; // adjust path if needed
+import SubjectButton from "@repo/ui/subjectbttn"; // adjust path if needed
 
 export default function Dashboard() {
   const subjects = [
