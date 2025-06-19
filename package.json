@@ -13,16 +13,15 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "@repo/eslint-config": "*",
     "prettier": "^3.5.3",
     "turbo": "^2.5.4",
-    "typescript": "5.8.2",
-    "@repo/eslint-config": "*"
-    
+    "typescript": "5.8.2"
   },
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.12.1",
   "workspaces": [
     "apps/*",
     "packages/*"
