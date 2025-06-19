@@ -25,6 +25,7 @@
     "typescript": "5.8.2"
   },
   "dependencies": {
+    "next": "^13.4.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   }
