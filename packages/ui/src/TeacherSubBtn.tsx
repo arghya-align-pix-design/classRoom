@@ -8,16 +8,18 @@ import './styles.css'; // Make sure this CSS file exists and is scoped properly
 
 interface SubjectCardProps {
   className?:string;
+  subjectId?:string;
   subjectName: string;
   gradeLevel: string;
-  day: string;
-  startTime: string; // Format: "HH:mm AM/PM"
-  endTime: string;   // Format: "HH:mm AM/PM"
+  day?: string;
+  startTime?: string; // Format: "HH:mm AM/PM"
+  endTime?: string;   // Format: "HH:mm AM/PM"
 }
 
 const SubjectCard: React.FC<SubjectCardProps> = ({
   subjectName,
   gradeLevel,
+  subjectId,
   day,
   startTime,
   endTime,
@@ -25,8 +27,8 @@ const SubjectCard: React.FC<SubjectCardProps> = ({
   return (
     <div className="subject-card">
       <div className="subject-info">
-        <h2 className="subject-title text-lg font-bold">{subjectName}</h2>
-        <p className="subject-grade text-sm text-gray-600">Grade: {gradeLevel}</p>
+        <h2 className="subject-title text-lg font-bold">{subjectName}: {subjectId}</h2>
+        <p className="subject-grade text-sm text-gray-200">Grade: {gradeLevel}</p>
         <div className="mt-2 flex gap-2">
            <Link
                 href={`/Dashboard-Teacher/Assignments/${subjectName}`}

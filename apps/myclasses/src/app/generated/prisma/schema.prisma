@@ -41,16 +41,29 @@ model User {
 }
 
 model Subject {
-  id        String   @id @default(uuid())
-  name      String
-  code      String   @unique
-  period    Int // like 1 for first period
-  dayOfWeek String // e.g. "Monday", "Tuesday"
-  startTime DateTime
-  endTime   DateTime
+  id    String @id @default(uuid())
+  name  String
+  code  String @unique
+  grade String // ⬅️ Add this (e.g. "9", "10", etc.)
+  // period     Int      // like 1 for first period
+  // dayOfWeek  String   // e.g. "Monday", "Tuesday"
+  // startTime  DateTime
+  // endTime    DateTime
 
   assignments Assignment[]
   enrollments Enrollment[]
+  schedules   SubjectSchedule[]
+}
+
+model SubjectSchedule {
+  id        String   @id @default(uuid())
+  dayOfWeek String // e.g. "Monday"
+  period    Int
+  startTime DateTime
+  endTime   DateTime
+
+  subjectId String
+  subject   Subject @relation(fields: [subjectId], references: [id])
 }
 
 model Enrollment {

@@ -60,7 +60,9 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="p-6">
+    // <div className="p-6 min-h-screen bg-gradient-to-br from-black via-neutral-900 to-black text-white">
+    <div className="p-6 min-h-screen bg-gradient-to-br from-white via-gray-100 to-white text-black">
+
       <h1 className="text-2xl font-bold mb-6">Good Morning, SIRE 👋</h1>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -76,7 +78,7 @@ export default function Dashboard() {
 
         {subjects.map((subject) => (
           <div key={subject.id} className="border-b py-4">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-yellow-500">
       🕒      {new Date(subject.startTime).toLocaleTimeString()} – {new Date(subject.endTime).toLocaleTimeString()}
             </p>
             <SubjectCard className=""

@@ -26,12 +26,21 @@ CREATE TABLE "Subject" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "code" TEXT NOT NULL,
-    "period" INTEGER NOT NULL,
-    "dayOfWeek" TEXT NOT NULL,
-    "startTime" TIMESTAMP(3) NOT NULL,
-    "endTime" TIMESTAMP(3) NOT NULL,
+    "grade" TEXT NOT NULL,
 
     CONSTRAINT "Subject_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "SubjectSchedule" (
+    "id" TEXT NOT NULL,
+    "dayOfWeek" TEXT NOT NULL,
+    "period" INTEGER NOT NULL,
+    "startTime" TIMESTAMP(3) NOT NULL,
+    "endTime" TIMESTAMP(3) NOT NULL,
+    "subjectId" TEXT NOT NULL,
+
+    CONSTRAINT "SubjectSchedule_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -79,6 +88,9 @@ CREATE UNIQUE INDEX "User_phone2_key" ON "User"("phone2");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Subject_code_key" ON "Subject"("code");
+
+-- AddForeignKey
+ALTER TABLE "SubjectSchedule" ADD CONSTRAINT "SubjectSchedule_subjectId_fkey" FOREIGN KEY ("subjectId") REFERENCES "Subject"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Enrollment" ADD CONSTRAINT "Enrollment_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
