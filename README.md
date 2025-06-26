@@ -1,3 +1,11 @@
+#classRoom
+
+A full-stack classroom platform where students can join classes, manage assignments and tests, and keep a portable document repository.
+
+⚙️ Note: Development is in progress. Core authentication and subject creation with JWT are functional; assignment and student submission features are under active development.
+
+
+
 # Turborepo starter
 
 This Turborepo starter is maintained by the Turborepo core team.
