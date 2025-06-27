@@ -1,10 +1,12 @@
 // lib/jwt.ts
-import jwt from 'jsonwebtoken';
+import jwt,{ SignOptions } from 'jsonwebtoken';
+import ms from "ms";
 
 const SECRET = process.env.JWT_SECRET || "devsecret";
 
-export function signToken(payload: object, expiresIn = '7d') {
-  return jwt.sign(payload, SECRET, { expiresIn });
+export function signToken(payload: object, expiresIn: ms.StringValue = "7d") {
+  const options: SignOptions = { expiresIn };
+  return jwt.sign(payload, SECRET, options);
 }
 
 export function verifyToken(token: string) {
