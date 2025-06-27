@@ -15,17 +15,13 @@ interface Subject {
 export default function Dashboard() {
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [showModal, setShowModal] = useState(false);
-  //const [teacherId, setTeacherId] = useState('');
-  //const [teacherName, setTeacherName] = useState('');
-  const data=localStorage.getItem('userData');
-  const parsedUser = data ? JSON.parse(data) : null;
-  const teacherId=localStorage.getItem("teacherId");
-  const teacherName=parsedUser?.name ?? '';
-  console.log(teacherId,"  ", teacherName);
+  const [teacherId, setTeacherId] = useState<string | null>(null);
+  const [teacherName, setTeacherName] = useState('');
+  const [token, setToken] = useState<string | null>(null);
 
-  const fetchSubjects = async () => {
-    //FETCHING TOKEN FROM LOCAL STORAGE
-    const token = localStorage.getItem('token');
+  
+
+  const fetchSubjects = async (token:string) => {
 
     //sending request to backend for sending back the subjects
     const res = await fetch('/api/Class/Subjects/Teachers',{
@@ -39,8 +35,27 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    fetchSubjects();
-  }, []);
+    //FETCHING TOKEN FROM LOCAL STORAGE
+    const Stoken = localStorage.getItem('token');
+
+    const data=localStorage.getItem('userData');
+    const parsedUser = data ? JSON.parse(data) : null;
+    const teacherId=localStorage.getItem("teacherId");
+    const teacherName=parsedUser?.name ?? '';
+    console.log(teacherId,"  ", teacherName);
+
+    if(Stoken)
+      setToken(Stoken);
+
+    if(teacherId)
+    setTeacherId(teacherId);
+
+    if(teacherName)
+      setTeacherName(teacherName);
+
+    if(token)
+    fetchSubjects(token);
+  }, [token]);
 
   return (
     <div className="p-6">
@@ -67,11 +82,11 @@ export default function Dashboard() {
       </div>
 
       {/* Modal */}
-      {showModal && (
+      {showModal && token && (
         <CreateClassModal
           onClose={() => {
             setShowModal(false);
-            fetchSubjects(); // Refresh list
+            fetchSubjects(token); // Refresh list
           }}
           apiUrl="/api/Class/createclass"
           teacherId={teacherId as string} 
