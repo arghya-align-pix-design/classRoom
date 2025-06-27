@@ -4,7 +4,8 @@ import prisma from '../../../../../lib/prisma'; // Adjust path if different
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, code, grade } = body;
+    const { name, code, grade,createdById } = body; //, createdBy  createdBy,
+    console.log(name, grade, createdById);
 
     if (!name || !code || !grade) {
       return NextResponse.json(
@@ -29,6 +30,10 @@ export async function POST(request: Request) {
         name,
         code,
         grade,
+        createdBy: {
+          connect: { id: createdById } // ✅ relation done right
+        }
+        //createdById
       },
     });
 

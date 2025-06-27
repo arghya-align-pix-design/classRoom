@@ -14,42 +14,41 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 enum Role {
   STUDENT
   TEACHER
 }
 
 model User {
-  id           String       @id @default(uuid())
-  name         String
-  dob        DateTime?
-  email        String       @unique
-  password     String
-  phone1      String? @unique
-  phone2      String? @unique
-  createdAt   DateTime @default(now())
-  role         Role
-  gradeLevel   String?      // For students only
-  schoolName   String?      // Optional
-  qualification String?     // For teachers only
-  bio          String?      // Optional teacher field
-  experience   Int?         // Years of teaching experience
+  id            String    @id @default(uuid())
+  name          String
+  dob           DateTime?
+  email         String    @unique
+  password      String
+  phone1        String?   @unique
+  phone2        String?   @unique
+  createdAt     DateTime  @default(now())
+  role          Role
+  gradeLevel    String? // For students only
+  schoolName    String? // Optional
+  qualification String? // For teachers only
+  bio           String? // Optional teacher field
+  experience    Int? // Years of teaching experience
 
-  assignments  Assignment[] @relation("TeacherAssignments")
-  submissions  Submission[]
-  enrollments  Enrollment[]
+  assignments     Assignment[] @relation("TeacherAssignments")
+  submissions     Submission[]
+  enrollments     Enrollment[]
+  subjectsCreated Subject[]    @relation("UserSubjectsCreated")
 }
 
 model Subject {
-  id          String       @id @default(uuid())
-  name        String
-  code        String       @unique
-  grade       String              // ⬅️ Add this (e.g. "9", "10", etc.)
-  // period     Int      // like 1 for first period
-  // dayOfWeek  String   // e.g. "Monday", "Tuesday"
-  // startTime  DateTime
-  // endTime    DateTime
+  id    String @id @default(uuid())
+  name  String
+  code  String @unique
+  grade String // ⬅️ Add this (e.g. "9", "10", etc.)
+  
+  createdById String
+  createdBy   User   @relation("UserSubjectsCreated", fields: [createdById], references: [id])
 
   assignments Assignment[]
   enrollments Enrollment[]
@@ -57,50 +56,47 @@ model Subject {
 }
 
 model SubjectSchedule {
-  id         String   @id @default(uuid())
-  dayOfWeek  String   // e.g. "Monday"
-  period     Int
-  startTime  DateTime
-  endTime    DateTime
+  id        String   @id @default(uuid())
+  dayOfWeek String // e.g. "Monday"
+  period    Int
+  startTime DateTime
+  endTime   DateTime
 
-  subjectId  String
-  subject    Subject  @relation(fields: [subjectId], references: [id])
+  subjectId String
+  subject   Subject @relation(fields: [subjectId], references: [id])
 }
 
-
-
 model Enrollment {
-  id        String   @id @default(uuid())
+  id        String @id @default(uuid())
   userId    String
   subjectId String
 
-  user      User     @relation(fields: [userId], references: [id])
-  subject   Subject  @relation(fields: [subjectId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+  subject Subject @relation(fields: [subjectId], references: [id])
 }
 
 model Assignment {
-  id         String       @id @default(uuid())
-  title      String
-  content    String
-  publishedAt DateTime    @default(now()) // When teacher publishes it
-  startDate  DateTime                   // When students can start
-  dueDate    DateTime
-  subjectId  String
-  teacherId  String
+  id          String   @id @default(uuid())
+  title       String
+  content     String
+  publishedAt DateTime @default(now()) // When teacher publishes it
+  startDate   DateTime // When students can start
+  dueDate     DateTime
+  subjectId   String
+  teacherId   String
 
-  subject    Subject      @relation(fields: [subjectId], references: [id])
-  teacher    User         @relation("TeacherAssignments", fields: [teacherId], references: [id])
+  subject     Subject      @relation(fields: [subjectId], references: [id])
+  teacher     User         @relation("TeacherAssignments", fields: [teacherId], references: [id])
   submissions Submission[]
 }
 
 model Submission {
-  id           String       @id @default(uuid())
+  id           String   @id @default(uuid())
   studentId    String
   assignmentId String
   fileUrl      String
-  submittedAt  DateTime     @default(now())
+  submittedAt  DateTime @default(now())
 
-  student      User         @relation(fields: [studentId], references: [id])
-  assignment   Assignment   @relation(fields: [assignmentId], references: [id])
+  student    User       @relation(fields: [studentId], references: [id])
+  assignment Assignment @relation(fields: [assignmentId], references: [id])
 }
-

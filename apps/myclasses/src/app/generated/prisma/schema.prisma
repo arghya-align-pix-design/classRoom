@@ -35,9 +35,10 @@ model User {
   bio           String? // Optional teacher field
   experience    Int? // Years of teaching experience
 
-  assignments Assignment[] @relation("TeacherAssignments")
-  submissions Submission[]
-  enrollments Enrollment[]
+  assignments     Assignment[] @relation("TeacherAssignments")
+  submissions     Submission[]
+  enrollments     Enrollment[]
+  subjectsCreated Subject[]    @relation("UserSubjectsCreated")
 }
 
 model Subject {
@@ -46,6 +47,10 @@ model Subject {
   code  String @unique
   grade String // ⬅️ Add this (e.g. "9", "10", etc.)
   // period     Int      // like 1 for first period
+
+  createdById String
+  createdBy   User   @relation("UserSubjectsCreated", fields: [createdById], references: [id])
+
   // dayOfWeek  String   // e.g. "Monday", "Tuesday"
   // startTime  DateTime
   // endTime    DateTime

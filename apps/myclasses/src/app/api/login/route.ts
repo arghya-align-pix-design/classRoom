@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../lib/prisma";
 import bcrypt from "bcrypt";
+import { signToken } from '../../auth/jwt';
 
 export async function POST(req: NextRequest) {
   try {
-     const { identifier, password } = await req.json();
+    //const body = await req.json();
+    //const { email, password } = body;
+    const { identifier, password } = await req.json();
 
     const user = await prisma.user.findFirst({
       where: {
@@ -28,7 +31,12 @@ export async function POST(req: NextRequest) {
     }
 
     // 🔐 You can set a JWT/cookie here for session management
-    return NextResponse.json({ message: "Login successful", user }, { status: 200 });
+    const token = signToken({
+      id: user.id,
+      role: user.role,
+      name: user.name
+    });
+    return NextResponse.json({ message: "Login successful", user, token  }, { status: 200 });
 
   } catch (error) {
     console.error("Login error:", error);

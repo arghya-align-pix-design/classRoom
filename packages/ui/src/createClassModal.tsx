@@ -5,9 +5,11 @@ import React, { useState } from 'react';
 interface Props {
   onClose: () => void;
   apiUrl: string;
+  teacherId:string;//  | null;
+  teacherName?:string;//| null;
 }
 
-export default function CreateClassModal({ onClose, apiUrl }: Props) {
+export default function CreateClassModal({ onClose, apiUrl , teacherId}: Props) { //, teacherName
   const [name, setName] = useState('');
   const [grade, setGrade] = useState('');
   const [code, setCode] = useState('');
@@ -27,7 +29,12 @@ export default function CreateClassModal({ onClose, apiUrl }: Props) {
     const res = await fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, grade, code: subjectCode }),
+      body: JSON.stringify({ name,
+        grade, 
+        code: subjectCode,
+        //createdBy:teacherName,
+        createdById:teacherId
+      }),
     });
 
     if (res.ok) {

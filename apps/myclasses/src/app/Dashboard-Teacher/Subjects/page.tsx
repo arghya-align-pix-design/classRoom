@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import SubjectCard from '@repo/ui/TeacherSubBtn'; // Existing card component
 import CreateClassModal from '@repo/ui/createClassModal'; // We’ll make this next
 
+
 interface Subject {
   id: string;
   name: string;
@@ -14,11 +15,27 @@ interface Subject {
 export default function Dashboard() {
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [showModal, setShowModal] = useState(false);
+  //const [teacherId, setTeacherId] = useState('');
+  //const [teacherName, setTeacherName] = useState('');
+  const data=localStorage.getItem('userData');
+  const parsedUser = JSON.parse(data);
+  const teacherId=localStorage.getItem("teacherId");
+  const teacherName=parsedUser.name;
+  console.log(teacherId,"  ", teacherName);
 
   const fetchSubjects = async () => {
-    const res = await fetch('/api/Class/Subjects'); // You'll create this route
+    //FETCHING TOKEN FROM LOCAL STORAGE
+    const token = localStorage.getItem('token');
+
+    //sending request to backend for sending back the subjects
+    const res = await fetch('/api/Class/Subjects/Teachers',{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }); // You'll create this route
+    
     const data = await res.json();
-    setSubjects(data);
+    setSubjects(data.classes || []);
   };
 
   useEffect(() => {
@@ -57,6 +74,8 @@ export default function Dashboard() {
             fetchSubjects(); // Refresh list
           }}
           apiUrl="/api/Class/createclass"
+          teacherId={teacherId} 
+          teacherName={teacherName}
         />
       )}
     </div>
