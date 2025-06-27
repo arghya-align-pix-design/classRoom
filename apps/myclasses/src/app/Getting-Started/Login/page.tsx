@@ -23,11 +23,13 @@ export default function SignInPage() {
         if (res.ok) {
             const data = await res.json();
             //TAKE OUT THE TOKEN AND STORE LOCALLY
+            if (data.token && data.user) {
             localStorage.setItem('token', data.token);
             console.log(data.token);
             localStorage.setItem('userData',JSON.stringify(data.user));
             console.log("user id received:", data.user.id);
             console.log("user name received",data.user.name);
+            }
             
             // first data locally saved then Role-based redirect
             if (data.user.role === "STUDENT") {
@@ -38,7 +40,9 @@ export default function SignInPage() {
             } else if (data.user.role === "TEACHER") {
                 localStorage.setItem('teacherId', data.user.id);
                 localStorage.setItem('teacherName',data.user.name);
-                 router.push("/Dashboard-Teacher");
+                setTimeout(() => {
+                    router.push("/Dashboard-Teacher");
+                }, 200);
             }
         } else {
             const data = await res.json();

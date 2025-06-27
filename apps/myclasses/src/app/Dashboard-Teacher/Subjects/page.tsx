@@ -18,9 +18,9 @@ export default function Dashboard() {
   //const [teacherId, setTeacherId] = useState('');
   //const [teacherName, setTeacherName] = useState('');
   const data=localStorage.getItem('userData');
-  const parsedUser = JSON.parse(data);
+  const parsedUser = data ? JSON.parse(data) : null;
   const teacherId=localStorage.getItem("teacherId");
-  const teacherName=parsedUser.name;
+  const teacherName=parsedUser?.name ?? '';
   console.log(teacherId,"  ", teacherName);
 
   const fetchSubjects = async () => {
@@ -74,7 +74,7 @@ export default function Dashboard() {
             fetchSubjects(); // Refresh list
           }}
           apiUrl="/api/Class/createclass"
-          teacherId={teacherId} 
+          teacherId={teacherId as string} 
           teacherName={teacherName}
         />
       )}
