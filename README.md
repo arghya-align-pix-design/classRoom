@@ -1,3 +1,35 @@
+#classRoom
+
+A full-stack classroom platform where students can join classes, manage assignments and tests, and keep a portable document repository.
+
+⚙️ Note: Development is in progress. Core authentication and subject creation with JWT are functional; assignment and student submission features are under active development.
+
+✨ Features
+✅ JWT Authentication
+
+✅ Teacher subject creation
+
+⏳ Assignment creation & submission (in progress)
+
+⏳ Student dashboard with to-do tracking (in progress)
+
+⏳ Document repository for students (planned)
+
+🛠 Tech Stack
+Frontend: Nextjs, Tailwind CSS
+
+Backend: Node.js, Next.js API routes
+
+Database: PostgreSQL (via Prisma ORM)
+
+Authentication: JSON Web Tokens (JWT)
+
+Deployment: Vercel
+
+
+
+
+
 # Turborepo starter
 
 This Turborepo starter is maintained by the Turborepo core team.
