@@ -13,34 +13,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     // <html lang="en">
     //   <body className="font-sans bg-gray-800">
     <div >
-        <nav className="bg-blue-800 shadow flex justify-around py-4 sticky top-0 z-50">
+        <nav className="bg-blue-300 shadow flex justify-around py-4 sticky top-0 z-50">
         <Link
           href="/Dashboard-Teacher"
-          className={`hover:text-blue-300 ${pathname === "/Dashboard-Teacher" ? "text-white font-semibold" : "text-blue-200"}`}
+          className={`hover:text-blue-900 ${pathname === "/Dashboard-Teacher" ? "text-shadow-blue-900 font-semibold" : "text-shadow-blue-900"}`}
         >
           Dashboard
         </Link>
         <Link
           href="/Dashboard-Teacher/Assignments"
-          className={`hover:text-blue-300 ${pathname === "/Dashboard-Teacher/Assignments" ? "text-white font-semibold" : "text-blue-200"}`}
+          className={`hover:text-blue-900 ${pathname === "/Dashboard-Teacher/Assignments" ? "text-shadow-blue-900 font-semibold" : "text-shadow-blue-900"}`}
         >
           Assignments
         </Link>
         <Link
           href="/Dashboard-Teacher/Subjects"
-          className={`hover:text-blue-300 ${pathname === "/Dashboard-Teacher/Submissions" ? "text-white font-semibold" : "text-blue-200"}`}
+          className={`hover:text-blue-900 ${pathname === "/Dashboard-Teacher/Subjects" ? "text-shadow-blue-700 font-semibold" : "text-shadow-blue-900"}`}
         >
           Subjects
         </Link>
         <Link
-          href="/Dashboard-Teacher/calendar"
-          className={`hover:text-blue-300 ${pathname === "/Dashboard-Teacher/calendar" ? "text-white font-semibold" : "text-blue-200"}`}
+          href="/Dashboard-Teacher/Schedule"
+          className={`hover:text-blue-900 ${pathname === "/Dashboard-Teacher/Schedule" ? "text-shadow-blue-900 font-semibold" : "text-blue-900"}`}
         >
-          Calendar
+          Schedule
         </Link>
         <Link
           href="/Dashboard-Teacher/Profile"
-          className={`hover:text-blue-300 ${pathname === "/Dashboard-Teacher/Profile" ? "text-white font-semibold" : "text-blue-200"}`}
+          className={`hover:text-blue-900 ${pathname === "/Dashboard-Teacher/Profile" ? "text-shadow-blue-900 font-semibold" : "text-blue-900"}`}
         >
           Profile
         </Link>

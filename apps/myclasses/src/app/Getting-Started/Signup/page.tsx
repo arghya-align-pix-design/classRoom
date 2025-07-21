@@ -1,10 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-//import { Button } from "@repo/ui/button";
 import {ParentDiv} from "@repo/ui/Parent";
-// import "./../globals.css";
 import TeacherSignUpForm from "@repo/ui/TeachForm"
+
 
 export default function SignUpPage() {
   const router = useRouter();

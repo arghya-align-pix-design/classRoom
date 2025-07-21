@@ -1,5 +1,3 @@
-// File: @repo/ui/components/SubjectCard.tsx
-
 'use client';
 
 import React from 'react';
@@ -19,37 +17,27 @@ interface SubjectCardProps {
 const SubjectCard: React.FC<SubjectCardProps> = ({
   subjectName,
   gradeLevel,
-  subjectId,
-  day,
-  startTime,
-  endTime,
 }) => {
   return (
-    <div className="subject-card">
-      <div className="subject-info">
-        <h2 className="subject-title text-lg font-bold">{subjectName}: {subjectId}</h2>
-        <p className="subject-grade text-sm text-gray-200">Grade: {gradeLevel}</p>
-        <div className="mt-2 flex gap-2">
-           <Link
-                href={`/Dashboard-Teacher/Assignments/${subjectName}`}
-                className="view-assignments-link">
-            <button className="px-3 py-1 text-sm bg-blue-500 text-white rounded subject-day">
-              View Assignments</button></Link>
-            <button className="px-3 py-1 text-sm bg-green-600 text-white rounded subject-time">
-                <Link
-                href={`/Dashboard-Teacher/Submissions`}  ///${encodeURIComponent(subjectName)}
-                className="view-assignments-link">
-                Check Submissions</Link>
-            </button>
-        </div>
-        
+    <div className="subject-card bg-white shadow-lg rounded-2xl p-6 w-[240px] h-[400px] flex flex-col justify-between">
+      <div>
+        <h1 className="subject-title text-xl font-bold mb-2 break-words">{subjectName}</h1>
+        <p className="subject-grade text-sm text-gray-300 mb-4">Grade: {gradeLevel}</p>
       </div>
-      {/* <Link
-        href={`/Teacher-Dash/Assignment/${encodeURIComponent(subjectName)}`}
-        className="view-assignments-link"
-      >
-        View Assignments
-      </Link> */}
+
+      <div className="flex flex-col gap-4">
+        <Link href={`/Dashboard-Teacher/Assignments/${subjectName}`}>
+          <button className="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+            View Assignments
+          </button>
+        </Link>
+
+        <Link href={`/Dashboard-Teacher/Submissions`}>
+          <button className="w-full py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+            Check Submissions
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
