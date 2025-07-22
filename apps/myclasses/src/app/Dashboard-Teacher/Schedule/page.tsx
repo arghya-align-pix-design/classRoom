@@ -87,7 +87,8 @@ export default function SetupRoutine() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4 py-10">
+    </*div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4 py-10"*/>
+      <div className="p-6 min-h-screen max-w-screen flex flex-col items-center justify-center px-4 py-10 bg-[rgba(240,240,240,0.55)] backdrop-blur-md rounded-xl shadow-md w-full   ">
       {!showForm && !routineGrid && (
         <div className="text-center bg-white p-6 rounded-2xl shadow-xl">
           <h1 className="text-2xl font-semibold text-gray-800 mb-4">
@@ -195,6 +196,7 @@ export default function SetupRoutine() {
           </table>
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 }

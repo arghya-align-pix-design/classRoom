@@ -54,8 +54,8 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="p-6 min-h-screen bg-gradient-to-br from-white via-gray-100 to-white text-black">
-
+    // <div className="p-6 min-h-screen bg-gradient-to-br from-green-400 via-gray-100 to-white text-black">
+     <div className="p-6 max-h-screen max-w-screen   bg-[rgba(240,240,240,0.75)] backdrop-blur-md rounded-xl shadow-md w-full">{/*max-w-5xl*/}
       <h1 className="text-2xl font-bold mb-6">Good Morning, SIRE 👋</h1>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -82,7 +82,7 @@ export default function Dashboard() {
             </div> */}
           </div>
         ))}
-      </div>
-    </div>
+      </div></div>
+    // </div>
   );
 }

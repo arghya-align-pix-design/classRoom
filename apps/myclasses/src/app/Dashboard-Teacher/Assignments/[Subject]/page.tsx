@@ -8,7 +8,7 @@ const SubjectAssignmentPage = () => {
   const subject = params.Subject as string;
 
   return (
-    <div className="p-6">
+    <div className="p-6 max-h-screen bg-[rgba(240,240,240,0.75)] backdrop-blur-md rounded-xl shadow-md w-full min-w-12/12  max-w-5xl">
       <h1 className="text-2xl font-bold mb-4">Assignments for {subject}</h1>
       <p className="text-gray-600">This page displays all assignments for the selected subject.</p>
       <div className="mt-6 p-4 border rounded shadow-sm">
