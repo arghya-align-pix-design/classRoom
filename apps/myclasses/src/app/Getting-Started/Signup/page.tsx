@@ -1,26 +1,20 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import {ParentDiv} from "@repo/ui/Parent";
-import TeacherSignUpForm from "@repo/ui/TeachForm"
-
+import { ParentDiv } from "@repo/ui/Parent";
+import TeacherSignUpForm from "@repo/ui/TeachForm";
 
 export default function SignUpPage() {
   const router = useRouter();
 
-   return (
-    <div className="w-screen h-screen  flex items-start justify-start p-4">
-        {/* <div className="items-center justify-center">
-            <div className="bg-amber-300 justify-center items-center text-center align-middle" style={{ color:"white", textShadow: "1px 2px 3px black, 0 0 5px blue" }}>
-                <h1 className="">Project1</h1>
-            </div>
-        </div> */}
-        {/* <div className="h-screen w-screen "> */}
-            <ParentDiv className="" variant="default" >
-               <TeacherSignUpForm/>
-            </ParentDiv>
-
-        {/* </div> */}
-    </div>
-   );
+  return (
+    <main className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-cyan-100 via-blue-100 to-white px-4 py-8">
+      <ParentDiv
+        className="w-full max-w-2xl p-10 bg-white/80 backdrop-blur-md rounded-xl shadow-xl border border-blue-200"
+        variant="default"
+      >
+        <TeacherSignUpForm />
+      </ParentDiv>
+    </main>
+  );
 }

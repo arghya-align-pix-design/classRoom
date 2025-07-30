@@ -151,7 +151,8 @@ exports.Prisma.SubjectScheduleScalarFieldEnum = {
   period: 'period',
   startTime: 'startTime',
   endTime: 'endTime',
-  subjectId: 'subjectId'
+  subjectId: 'subjectId',
+  teacherId: 'teacherId'
 };
 
 exports.Prisma.EnrollmentScalarFieldEnum = {

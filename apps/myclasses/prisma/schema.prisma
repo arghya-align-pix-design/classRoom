@@ -39,6 +39,7 @@ model User {
   submissions     Submission[]
   enrollments     Enrollment[]
   subjectsCreated Subject[]    @relation("UserSubjectsCreated")
+   schedules SubjectSchedule[] @relation("TeacherSchedules")
 }
 
 model Subject {
@@ -64,6 +65,9 @@ model SubjectSchedule {
 
   subjectId String
   subject   Subject @relation(fields: [subjectId], references: [id])
+
+  teacherId String         
+  teacher   User @relation("TeacherSchedules", fields: [teacherId], references: [id])
 }
 
 model Enrollment {
